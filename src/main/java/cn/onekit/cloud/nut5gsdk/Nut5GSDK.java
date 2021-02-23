@@ -9,7 +9,7 @@ import cn.onekit.thekit.JSON;
 import com.google.gson.JsonObject;
 
 import java.util.HashMap;
-
+import java.util.Map;
 
 
 public class Nut5GSDK implements Nut5GAPI {
@@ -19,90 +19,109 @@ public class Nut5GSDK implements Nut5GAPI {
         this.host=host;
     }
 
-
-    @Override
-    public AccessTokenResponse accessToken(AccessTokenRequest accessTokenRequest) throws Nut5GError {
-        JsonObject result = null;
-        try {
-            String url = String.format("%s/accessToken",host);
-            AJAX.headers = new HashMap<String,String>(){{
-                put("Content-Type","application/json");
-            }};
-            JsonObject post_body = (JsonObject) JSON.object2json(accessTokenRequest);
-            result = (JsonObject) JSON.parse(AJAX.request(url,"post", post_body.toString()));
-
-            return JSON.json2object(result,AccessTokenResponse.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+    void _init(String accessToken,  Map<String,String> headers) {
+        if (headers == null) {
+            headers = new HashMap<>();
         }
 
+        if (accessToken != null) {
+            headers.put("Authorization", String.format("accessToken %s", accessToken));
+        }
+        AJAX.headers = headers;
     }
-
+    void _init(String accessToken) {
+        _init(accessToken,new HashMap<String,String>(){{
+            put("Content-Type","application/json");
+        }});
+    }
+    @Override
+    public AccessTokenResponse accessToken(AccessTokenRequest accessTokenRequest) throws Nut5GError {
+        try {
+            String url = String.format("%s/accessToken", host);
+            _init(null);
+            JsonObject post_body = (JsonObject) JSON.object2json(accessTokenRequest);
+            /////////////////////////////////////////
+            JsonObject result = (JsonObject) JSON.parse(AJAX.request(url, "post", post_body.toString()));
+            if (result.get("errorCode").getAsInt() != 0) {
+                throw JSON.json2object(result, Nut5GError.class);
+            }
+            //////////////////////////////////////
+            return JSON.json2object(result, AccessTokenResponse.class);
+        } catch (Nut5GError e) {
+            throw e;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Nut5GError();
+        }
+    }
 
     @Override
     public void chatBotInfo(String accessToken,ChatBotInfoRequest chatBotInfoRequest) throws Nut5GError {
         try {
         String url = String.format("%s/update/chatBotInfo/optionals",host);
-        AJAX.headers = new HashMap<String,String>(){{
-            put("Content-Type","application/json");
-            put("Authorization",accessToken);
-        }};
+            _init(accessToken);
         JsonObject post_body = (JsonObject) JSON.object2json(chatBotInfoRequest);
         AJAX.request(url,"post", post_body.toString());
         } catch (Exception e) {
             e.printStackTrace();
+            throw new Nut5GError();
         }
 
     }
 
     @Override
-    public void chatBotInfomenu(ChatBotInfomenuRequest chatBotInfomenuRequest) throws Nut5GError {
+    public void chatBotInfomenu(String accessToken,ChatBotInfomenuRequest chatBotInfomenuRequest) throws Nut5GError {
         try {
             String url = String.format("%s/update/chatBotInfo/menu",host);
-            AJAX.headers = new HashMap<String,String>(){{
-                put("Content-Type","application/json");
-            }};
+            _init(accessToken);
             JsonObject post_body = (JsonObject) JSON.object2json(chatBotInfomenuRequest);
             AJAX.request(url,"post", post_body.toString());
         } catch (Exception e) {
             e.printStackTrace();
+            throw new Nut5GError();
         }
 
     }
 
     @Override
-    public FindchatBotInfoResponse findchatBotInfo() throws Nut5GError {
-        JsonObject result = null;
+    public FindchatBotInfoResponse findchatBotInfo(String accessToken) throws Nut5GError {
         try {
             String url = String.format("%s/find/chatBotInfo",host);
-//            AJAX.headers = new HashMap<String,String>(){{
-//                put("Content-Type","application/json");
-//            }};
-            result = (JsonObject) JSON.parse(AJAX.request(url,"post", ""));
+            _init(accessToken);
+            JsonObject result = (JsonObject) JSON.parse(AJAX.request(url));
+            return JSON.json2object(result,FindchatBotInfoResponse.class);
+        } catch (Nut5GError e) {
+            throw e;
         } catch (Exception e) {
             e.printStackTrace();
+            throw new Nut5GError();
         }
-        return JSON.json2object(result,FindchatBotInfoResponse.class);
     }
 
     @Override
-    public MediasuploadResponse mediasupload(byte[] bytes) throws Nut5GError {
-        JsonObject result = null;
+    public MediasuploadResponse mediasupload(String accessToken,String uploadMode, Map<String,byte[]> files) throws Nut5GError {
         try {
             String url = String.format("%s/medias/upload",host);
-            AJAX.headers = new HashMap<String,String>(){{
-                put("Content-Type","multipart/form-data");
-            }};
-            result = (JsonObject) JSON.parse(AJAX.upload(url,bytes));
+            _init(accessToken,new HashMap<String, String>(){{
+                put("UploadMode",uploadMode);
+            }});
+            JsonObject result = (JsonObject) JSON.parse(AJAX.upload(url,files));
+            if (result.get("errorCode").getAsInt() != 0) {
+                throw JSON.json2object(result, Nut5GError.class);
+            }
+            ///////////////////////////////
+            return JSON.json2object(result,MediasuploadResponse.class);
+        } catch (Nut5GError e) {
+            throw e;
         } catch (Exception e) {
             e.printStackTrace();
+            throw new Nut5GError();
         }
-        return JSON.json2object(result,MediasuploadResponse.class);
+
     }
 
     @Override
-    public byte[] mediasdownload(String s) throws Nut5GError {
+    public byte[] mediasdownload(String accessToken,String s) throws Nut5GError {
         byte[] result = null;
         try {
             String url = String.format("%s/medias/download",host);
@@ -117,7 +136,7 @@ public class Nut5GSDK implements Nut5GAPI {
     }
 
     @Override
-    public MediasdeleteResponse mediasdelete(String s) throws Nut5GError {
+    public MediasdeleteResponse mediasdelete(String accessToken,String s) throws Nut5GError {
         JsonObject result = null;
         try {
             String url = String.format("%s/medias/delete",host);
@@ -132,7 +151,7 @@ public class Nut5GSDK implements Nut5GAPI {
     }
 
     @Override
-    public MessagesResponse messages(MessagesRequest messagesRequest) throws Nut5GError {
+    public MessagesResponse messages(String accessToken,MessagesRequest messagesRequest) throws Nut5GError {
         JsonObject result = null;
         try {
             String url = String.format("%s/messages",host);
@@ -148,7 +167,7 @@ public class Nut5GSDK implements Nut5GAPI {
     }
 
     @Override
-    public MessagesrevokeResponse messagesrevoke(MessagesrevokeRequest messagesrevokeRequest) throws Nut5GError {
+    public MessagesrevokeResponse messagesrevoke(String accessToken,MessagesrevokeRequest messagesrevokeRequest) throws Nut5GError {
         JsonObject result = null;
         try {
             String url = String.format("%s/revoke",host);
