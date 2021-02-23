@@ -8,9 +8,8 @@ import cn.onekit.thekit.AJAX;
 import cn.onekit.thekit.JSON;
 import com.google.gson.JsonObject;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
+
 
 
 public class Nut5GSDK implements Nut5GAPI {
@@ -19,6 +18,7 @@ public class Nut5GSDK implements Nut5GAPI {
     public Nut5GSDK(String host){
         this.host=host;
     }
+
 
     @Override
     public AccessTokenResponse accessToken(AccessTokenRequest accessTokenRequest) throws Nut5GError {
@@ -30,42 +30,45 @@ public class Nut5GSDK implements Nut5GAPI {
             }};
             JsonObject post_body = (JsonObject) JSON.object2json(accessTokenRequest);
             result = (JsonObject) JSON.parse(AJAX.request(url,"post", post_body.toString()));
+
+            return JSON.json2object(result,AccessTokenResponse.class);
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return JSON.json2object(result,AccessTokenResponse.class);
+
     }
 
+
     @Override
-    public Nut5GResponse chatBotInfo(ChatBotInfoRequest chatBotInfoRequest) throws Nut5GError {
-        JsonObject result = null;
+    public void chatBotInfo(String accessToken,ChatBotInfoRequest chatBotInfoRequest) throws Nut5GError {
         try {
         String url = String.format("%s/update/chatBotInfo/optionals",host);
         AJAX.headers = new HashMap<String,String>(){{
             put("Content-Type","application/json");
+            put("Authorization",accessToken);
         }};
         JsonObject post_body = (JsonObject) JSON.object2json(chatBotInfoRequest);
-        result = (JsonObject) JSON.parse(AJAX.request(url,"post", post_body.toString()));
+        AJAX.request(url,"post", post_body.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return JSON.json2object(result,Nut5GResponse.class);
+
     }
 
     @Override
-    public Nut5GResponse chatBotInfomenu(ChatBotInfomenuRequest chatBotInfomenuRequest) throws Nut5GError {
-        JsonObject result = null;
+    public void chatBotInfomenu(ChatBotInfomenuRequest chatBotInfomenuRequest) throws Nut5GError {
         try {
             String url = String.format("%s/update/chatBotInfo/menu",host);
             AJAX.headers = new HashMap<String,String>(){{
                 put("Content-Type","application/json");
             }};
             JsonObject post_body = (JsonObject) JSON.object2json(chatBotInfomenuRequest);
-            result = (JsonObject) JSON.parse(AJAX.request(url,"post", post_body.toString()));
+            AJAX.request(url,"post", post_body.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return JSON.json2object(result,Nut5GResponse.class);
+
     }
 
     @Override
