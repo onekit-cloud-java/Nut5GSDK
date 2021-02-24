@@ -121,124 +121,87 @@ public class Nut5GSDK implements Nut5GAPI {
     }
 
     @Override
-    public byte[] mediasdownload(String accessToken,String s) throws Nut5GError {
-        byte[] result = null;
+    public byte[] mediasdownload(String accessToken,String downloadurl) throws Nut5GError {
         try {
             String url = String.format("%s/medias/download",host);
-            AJAX.headers = new HashMap<String,String>(){{
-                put("Content-Type","multipart/form-data");
-            }};
-            result = AJAX.download(url, "post", s);
+            _init(accessToken,new HashMap<String, String>(){{
+                put("url",downloadurl);
+            }});
+            return AJAX.download(url, "get","");
+        } catch (Nut5GError e) {
+            throw e;
         } catch (Exception e) {
             e.printStackTrace();
+            throw new Nut5GError();
         }
-        return result;
     }
 
     @Override
-    public MediasdeleteResponse mediasdelete(String accessToken,String s) throws Nut5GError {
-        JsonObject result = null;
+    public MediasdeleteResponse mediasdelete(String accessToken,String deleteurl) throws Nut5GError {
         try {
+            JsonObject result = null;
             String url = String.format("%s/medias/delete",host);
-//            AJAX.headers = new HashMap<String,String>(){{
-//                put("Content-Type","application/json");
-//            }};
-            result = (JsonObject) JSON.parse(AJAX.request(url,"post", s));
+            _init(accessToken,new HashMap<String, String>(){{
+                put("url",deleteurl);
+            }});
+            result = (JsonObject) JSON.parse(AJAX.request(url,"delete",""));
+            if (result.get("errorCode").getAsInt() != 0) {
+                throw JSON.json2object(result, Nut5GError.class);
+            }
+            return JSON.json2object(result,MediasdeleteResponse.class);
+        } catch (Nut5GError e) {
+            throw e;
         } catch (Exception e) {
             e.printStackTrace();
+            throw new Nut5GError();
         }
-        return JSON.json2object(result,MediasdeleteResponse.class);
+
     }
 
     @Override
     public MessagesResponse messages(String accessToken,MessagesRequest messagesRequest) throws Nut5GError {
-        JsonObject result = null;
         try {
+            JsonObject result = null;
             String url = String.format("%s/messages",host);
-            AJAX.headers = new HashMap<String,String>(){{
+            _init(accessToken,new HashMap<String, String>(){{
                 put("Content-Type","application/json");
-            }};
+            }});
             JsonObject post_body = (JsonObject) JSON.object2json(messagesRequest);
             result = (JsonObject) JSON.parse(AJAX.request(url,"post", post_body.toString()));
+            if (result.get("errorCode").getAsInt() != 0) {
+                throw JSON.json2object(result, Nut5GError.class);
+            }
+            return JSON.json2object(result,MessagesResponse.class);
+        } catch (Nut5GError e) {
+            throw e;
         } catch (Exception e) {
             e.printStackTrace();
+            throw new Nut5GError();
         }
-        return JSON.json2object(result,MessagesResponse.class);
+
     }
 
     @Override
     public MessagesrevokeResponse messagesrevoke(String accessToken,MessagesrevokeRequest messagesrevokeRequest) throws Nut5GError {
-        JsonObject result = null;
+
         try {
+            JsonObject result = null;
             String url = String.format("%s/revoke",host);
-            AJAX.headers = new HashMap<String,String>(){{
+            _init(accessToken,new HashMap<String, String>(){{
                 put("Content-Type","application/json");
-            }};
+            }});
             JsonObject post_body = (JsonObject) JSON.object2json(messagesrevokeRequest);
             result = (JsonObject) JSON.parse(AJAX.request(url,"post", post_body.toString()));
+            return JSON.json2object(result,MessagesrevokeResponse.class);
+        } catch (Nut5GError e) {
+            throw e;
         } catch (Exception e) {
             e.printStackTrace();
+            throw new Nut5GError();
         }
-        return JSON.json2object(result,MessagesrevokeResponse.class);
+
     }
 
-    @Override
-    public void receivemessage(ReceivemessageRequest receivemessageRequest) throws Nut5GError {
-        try {
-            String url = String.format("%s/messages",host);
-            AJAX.headers = new HashMap<String,String>(){{
-                put("Content-Type","application/json");
-            }};
-            JsonObject post_body = (JsonObject) JSON.object2json(receivemessageRequest);
-            AJAX.request(url,"post", post_body.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
-    @Override
-    public void status(StatusRequest statusRequest) throws Nut5GError {
-        try {
-            String url = String.format("%s/status",host);
-            AJAX.headers = new HashMap<String,String>(){{
-                put("Content-Type","application/json");
-            }};
-            JsonObject post_body = (JsonObject) JSON.object2json(statusRequest);
-            AJAX.request(url,"post", post_body.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
-    @Override
-    public void informationChange() throws Nut5GError {
-        try {
-            String url = String.format("%s/notice/informationChange",host);
-            AJAX.request(url,"post","");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void rcsspam(RcsspamRequest rcsspamRequest) throws Nut5GError {
-        try {
-            String url = String.format("%s/notice/rcsspam",host);
-            JsonObject post_body = (JsonObject) JSON.object2json(rcsspamRequest);
-            AJAX.request(url,"post", post_body.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void check(CheckRequest checkRequest) throws Nut5GError {
-        try {
-            String url = String.format("%s/check",host);
-            JsonObject post_body = (JsonObject) JSON.object2json(checkRequest);
-            AJAX.request(url,"post", post_body.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
