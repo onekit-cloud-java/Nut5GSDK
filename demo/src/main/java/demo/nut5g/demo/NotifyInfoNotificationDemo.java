@@ -1,6 +1,8 @@
 package demo.nut5g.demo;
 
 import cn.onekit.cloud.nut5g.notification.NotifyInfoNotification;
+import cn.onekit.cloud.nut5g.notification.request.CheckNotification;
+import cn.onekit.cloud.nut5g.notification.request.RcsspamNotification;
 import cn.onekit.cloud.nut5g.request.*;
 import cn.onekit.cloud.nut5g.response.*;
 import cn.onekit.cloud.nut5gsdk.Nut5GSDK;
@@ -8,6 +10,7 @@ import cn.onekit.thekit.FileDB;
 import cn.onekit.thekit.JSON;
 import cn.onekit.thekit.STRING;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,28 +29,28 @@ import java.util.List;
 @RequestMapping("/nut5g/notifyInfoNotification/sip:2021020501@botplatform.rcs.chinaunicom.cn/notice")
 public class NotifyInfoNotificationDemo {
 
-    @RequestMapping("/informationChange")
+    @RequestMapping(value = "/informationChange",method = RequestMethod.POST)
     public void informationChange(
-            @RequestParam HttpServletRequest request
+             HttpServletRequest request
     ) throws Exception {
         //String accessToken = FileDB.get("demo","accessToken").value;
         NotifyInfoNotification.informationChange(request,DemoApplication.accessToken);
     }
 
-    @RequestMapping("/rcsspam")
-    public void rcsspam(
-            @RequestParam HttpServletRequest request
+    @RequestMapping(value = "/rcsspam",method = RequestMethod.POST)
+    public RcsspamNotification rcsspam(
+            HttpServletRequest request
     ) throws Exception {
     //    String accessToken = FileDB.get("demo","accessToken").value;
-        NotifyInfoNotification.rcsspam(request,DemoApplication.accessToken);
+        return NotifyInfoNotification.rcsspam(request,DemoApplication.accessToken);
     }
 
-    @RequestMapping("/check")
-    public void checkmessage(
-            @RequestParam HttpServletRequest request
+    @RequestMapping(value = "/check",method = RequestMethod.POST)
+    public CheckNotification checkmessage(
+            HttpServletRequest request
     ) throws Exception {
        // String accessToken = FileDB.get("demo","accessToken").value;
-        NotifyInfoNotification.check(request,DemoApplication.accessToken);
+       return NotifyInfoNotification.check(request,DemoApplication.accessToken);
     }
 
 

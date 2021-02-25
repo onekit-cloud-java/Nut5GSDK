@@ -13,13 +13,14 @@ import java.util.*;
 
 @SpringBootApplication
 public class DemoApplication {
+
 public static  String accessToken = "52bf3f57-5bea-481f-9389-6425fade6778";
-    @Bean
-    public ServletWebServerFactory webServerFactory() {
-        TomcatServletWebServerFactory fa = new TomcatServletWebServerFactory();
-        fa.addConnectorCustomizers((TomcatConnectorCustomizer) connector -> connector.setProperty("relaxedQueryChars", "[]{}:@%."));
-        return fa;
-    }
+//    @Bean
+//    public ServletWebServerFactory webServerFactory() {
+//        TomcatServletWebServerFactory fa = new TomcatServletWebServerFactory();
+//        fa.addConnectorCustomizers((TomcatConnectorCustomizer) connector -> connector.setProperty("relaxedQueryChars", "[]{}:@%."));
+//        return fa;
+//    }
 
     public static void main(String[] args) {
 

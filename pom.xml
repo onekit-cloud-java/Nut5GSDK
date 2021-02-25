@@ -19,12 +19,12 @@
         <dependency>
             <groupId>cn.onekit.x2x.cloud</groupId>
             <artifactId>thekit</artifactId>
-            <version>3.3.17</version>
+            <version>3.3.19</version>
         </dependency>
         <dependency>
             <groupId>cn.onekit.x2x.cloud</groupId>
             <artifactId>nut5g</artifactId>
-            <version>4.7.18</version>
+            <version>4.7.24</version>
         </dependency>
     </dependencies>
     <!--
