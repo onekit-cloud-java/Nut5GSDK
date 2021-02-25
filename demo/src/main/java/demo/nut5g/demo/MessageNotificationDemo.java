@@ -1,7 +1,6 @@
 package demo.nut5g.demo;
 
 import cn.onekit.cloud.nut5g.notification.MessageNotification;
-import cn.onekit.cloud.nut5g.notification.NotifyInfoNotification;
 import cn.onekit.cloud.nut5g.notification.request.ReceivemessageNotification;
 import cn.onekit.thekit.FileDB;
 import cn.onekit.thekit.JSON;
