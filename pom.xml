@@ -6,7 +6,7 @@
 
     <groupId>cn.onekit.x2x.cloud</groupId>
     <artifactId>nut5g-sdk</artifactId>
-    <version>4.7.9</version>
+    <version>4.7.24</version>
     <name>Nut5GSDK</name>
     <url>https://github.com/onekit-cloud-java/nut5gsdk</url>
     <description>nut5g cloud sdk</description>
