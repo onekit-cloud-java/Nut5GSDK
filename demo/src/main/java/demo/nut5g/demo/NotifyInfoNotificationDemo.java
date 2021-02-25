@@ -19,10 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 
 @RestController
@@ -38,19 +35,25 @@ public class NotifyInfoNotificationDemo {
     }
 
     @RequestMapping(value = "/rcsspam",method = RequestMethod.POST)
-    public RcsspamNotification rcsspam(
+    public void rcsspam(
             HttpServletRequest request
     ) throws Exception {
     //    String accessToken = FileDB.get("demo","accessToken").value;
-        return NotifyInfoNotification.rcsspam(request,DemoApplication.accessToken);
+        RcsspamNotification data =  NotifyInfoNotification.rcsspam(request,DemoApplication.accessToken);
+        String json = JSON.object2string(data);
+        System.out.println(json);
+        FileDB.set("rcsspam",new Date().toString(),json);
     }
 
     @RequestMapping(value = "/check",method = RequestMethod.POST)
-    public CheckNotification checkmessage(
+    public void checkmessage(
             HttpServletRequest request
     ) throws Exception {
        // String accessToken = FileDB.get("demo","accessToken").value;
-       return NotifyInfoNotification.check(request,DemoApplication.accessToken);
+        CheckNotification data = NotifyInfoNotification.check(request,DemoApplication.accessToken);
+        String json = JSON.object2string(data);
+        System.out.println(json);
+        FileDB.set("checkmessage",new Date().toString(),json);
     }
 
 

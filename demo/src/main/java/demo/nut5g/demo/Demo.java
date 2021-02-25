@@ -1,6 +1,5 @@
 package demo.nut5g.demo;
 
-import cn.onekit.cloud.nut5g.notification.NotifyInfoNotification;
 import cn.onekit.cloud.nut5g.request.*;
 import cn.onekit.cloud.nut5g.response.*;
 import cn.onekit.cloud.nut5gsdk.Nut5GSDK;
@@ -164,47 +163,6 @@ public class Demo {
         messagesrevokeRequest.setDestinationAddress(list);
         return sdk.messagesrevoke(accessToken,messagesrevokeRequest);
     }
-//
-//    @RequestMapping("/messageNotification/sip%3A2021020501%40botplatform.rcs.chinaunicom.cn/messages")
-//    public void recievemessage(
-//            @RequestParam HttpServletRequest request
-//    ) throws Exception {
-//       // String accessToken = FileDB.get("demo","accessToken").value;
-//       // Nut5GNotify.receivemessage(request,DemoApplication.accessToken);
-//
-//    }
-//    @RequestMapping("/deliveryNotification/sip%3A2021020501%40botplatform.rcs.chinaunicom.cn/status")
-//    public void status(
-//            @RequestParam HttpServletRequest request
-//    ) throws Exception {
-//        //String accessToken = FileDB.get("demo","accessToken").value;
-//       // Nut5GNotify.status(request,DemoApplication.accessToken);
-//    }
-//    @RequestMapping("/notifyInfoNotification")
-//    public void informationChange(
-//            @RequestParam HttpServletRequest request
-//    ) throws Exception {
-//        //String accessToken = FileDB.get("demo","accessToken").value;
-//        NotifyInfoNotification.informationChange(request,DemoApplication.accessToken);
-//    }
-//
-//    @RequestMapping("/notifyInfoNotification/sip%3A2021020501%40botplatform.rcs.chinaunicom.cn/notice/rcsspam")
-//    public void rcsspam(
-//            @RequestParam HttpServletRequest request
-//    ) throws Exception {
-//    //    String accessToken = FileDB.get("demo","accessToken").value;
-//        NotifyInfoNotification.rcsspam(request,DemoApplication.accessToken);
-//    }
-//
-//    @RequestMapping("/notifyInfoNotification/sip%3A2021020501%40botplatform.rcs.chinaunicom.cn/check")
-//    public void checkmessage(
-//            @RequestParam HttpServletRequest request
-//    ) throws Exception {
-//       // String accessToken = FileDB.get("demo","accessToken").value;
-//        NotifyInfoNotification.check(request,DemoApplication.accessToken);
-//    }
-
-
 
 
 
