@@ -36,7 +36,7 @@
         <dependency>
             <groupId>cn.onekit.x2x.cloud</groupId>
             <artifactId>nut5g-sdk</artifactId>
-            <version>4.7.9</version>
+            <version>5.0.0</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
