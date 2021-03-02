@@ -273,6 +273,112 @@ public class Demo {
         return sdk.messages(accessToken, request);
     }
 
+    @RequestMapping("/messages5")
+    public MessagesResponse messages5() throws Exception {
+        String accessToken = FileDB.get("demo", "accessToken").value;
+        MessagesRequest request = new MessagesRequest();
+        request.setMessageId("cb1188a3-37ec-1037-9054-2dc66e44375b");
+        ArrayList<String> address = new ArrayList<>();
+        address.add("tel:+8618161274077");
+        request.setDestinationAddress(address);
+        request.setSenderAddress("sip:2021020501@botplatform.rcs.chinaunicom.cn");
+        request.setSmsSupported(false);
+        request.setSmsContent("hello world!");
+        request.setContributionId("SFF$#REGFY7&^%THT");
+        request.setConversationId("XSFDSFDFSAFDSAS^%");
+        ServiceCapability serviceCapability = new ServiceCapability();
+        serviceCapability.setVersion("+g.gsma.rcs.botversion=\\\"#=1\\\"");
+        request.setServiceCapability(Arrays.asList(serviceCapability));
+        ///////卡片消息////////////////////
+        MessagesRequest.Botmessage botMessage = new MessagesRequest.Botmessage();
+        MessagesRequest.Botmessage.ContentText contentText = new MessagesRequest.Botmessage.ContentText();
+        Botmessage.ContentText.CssMessage cssMessage = new Botmessage.ContentText.CssMessage();
+        Botmessage.ContentText.CssMessage.GeneralPurposeCard generalPurposeCard = new Botmessage.ContentText.CssMessage.GeneralPurposeCard();
+        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content content = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content();
+        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Layout layout = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Layout();
+        layout.setCardOrientation("HORIZONTAL");
+        layout.setImageAlignment("LEFT");
+        layout.setTitleFontStyle(new ArrayList<String>(){{
+            add("underline");
+            add("bold");
+        }});
+        layout.setDescriptionFontStyle(new ArrayList<String>(){{
+            add("calibri");
+        }});
+        layout.setStyle("http://example.com/default.css");
+        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Media media = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Media();
+        media.setMediaUrl("http://maap.5g-msg.com:30001/bot/v1/medias/fid/526573781936357376");
+        media.setMediaContentType("image/png");
+        media.setMediaFileSize("6617");
+        media.setThumbnailUrl("http://maap.5g-msg.com:30001/bot/v1/medias/fid/526573781936357376");
+        media.setThumbnailContentType("image/png");
+        media.setThumbnailFileSize(6617);
+        media.setHeight("MEDIUM_HEIGHT");
+        media.setContentDescription("Textual description of media content, e. g. for use with screen readers");
+        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion suggestion1 = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion();
+        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion suggestion2 = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion();
+        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion suggestion3 = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion();
+       ///////////////////////
+        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action action1 = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action();
+        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Reply reply = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Reply();
+
+        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Reply.Postback postback = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Reply.Postback();
+        postback.setData("set_by_chatbot_reply_no");
+        reply.setDisplayText("No");
+        reply.setPostback(postback);
+        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.UrlAction urlAction = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.UrlAction();
+        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.UrlAction.OpenUrl openUrl = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.UrlAction.OpenUrl();
+        openUrl.setUrl("https://www.10010.cn");
+        openUrl.setApplication("webview");
+        openUrl.setViewMode("half");
+        urlAction.setOpenUrl(openUrl);
+        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.Postback postback1 = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.Postback();
+        postback1.setData("set_by_chatbot_open_url");
+        action1.setUrlAction(urlAction);
+        action1.setDisplayText("Open website or deep link");
+        action1.setPostback(postback1);
+        suggestion1.setAction(action1);
+        ///////////////////////
+        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action action2 = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action();
+        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.DialerAction dialerAction = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.DialerAction();
+        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.DialerAction.DialPhoneNumber dialPhoneNumber = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.DialerAction.DialPhoneNumber();
+        dialPhoneNumber.setPhoneNumber("+8617928222350");
+
+        dialerAction.setDialPhoneNumber(dialPhoneNumber);
+        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.Postback postback2 = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.Postback();
+        postback2.setData("set_by_chatbot_open_dialer");
+        action2.setDialerAction(dialerAction);
+        action2.setDisplayText("Call a phone number");
+        action2.setPostback(postback2);
+
+        suggestion1.setAction(action1);
+        suggestion2.setAction(action2);
+        suggestion3.setReply(reply);
+
+        content.setMedia(media);
+        content.setSuggestions(new ArrayList<Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion>(){{
+            add(suggestion1);
+            add(suggestion2);
+            add(suggestion3);
+        }});
+        content.setDescription("This is the description of the rich card. It's the first field that will be truncated if it exceeds the maximum width or height of a card");
+        content.setTitle("This is a single rich card");
+
+
+        generalPurposeCard.setContent(content);
+        generalPurposeCard.setLayout(layout);
+
+        cssMessage.setGeneralPurposeCard(generalPurposeCard);
+        contentText.setMessage(cssMessage);
+
+        botMessage.setContentText(contentText);
+        List<MessagesRequest.Botmessage> messageList = new ArrayList<>();
+        messageList.add(botMessage);
+        System.out.println(JSON.object2string(messageList));
+
+        return sdk.messages(accessToken, request);
+    }
+
 
 
     @RequestMapping("/messagesrevoke")
