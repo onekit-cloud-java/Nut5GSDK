@@ -17,6 +17,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.*;
 
+import static cn.onekit.cloud.nut5g.request.MessagesRequest.*;
+
 
 @RestController
 @RequestMapping("/nut5g")
@@ -65,7 +67,7 @@ public class Demo {
     @RequestMapping("/mediasupload")
     public MediasuploadResponse mediasupload() throws Exception {
         String accessToken = FileDB.get("demo","accessToken").value;
-        File file = new File("E:\\result.png");
+        File file = new File("E:\\a.png");
         BufferedImage read = ImageIO.read(file);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(read, "png", baos);
@@ -79,6 +81,7 @@ public class Demo {
     @RequestMapping("/mediasdownload")
     public byte[] mediasdownload() throws Exception {
         String accessToken = FileDB.get("demo","accessToken").value;
+        System.out.println(accessToken);
         String url = "https://www.baidu.com/img/dong_8f1d47bcb77d74a1e029d8cbb3b33854.gif";
         return sdk.mediasdownload(accessToken,url);
     }
@@ -90,8 +93,8 @@ public class Demo {
         return sdk.mediasdelete(accessToken,url);
     }
 
-    @RequestMapping("/messages")
-    public MessagesResponse messages() throws Exception {
+    @RequestMapping("/messages1")
+    public MessagesResponse messages1() throws Exception {
         String accessToken = FileDB.get("demo","accessToken").value;
         MessagesRequest request = new MessagesRequest();
         request.setMessageId("cb1188a3-37ec-1037-9054-2dc66e44375b");
@@ -100,16 +103,92 @@ public class Demo {
         request.setDestinationAddress(address);
         request.setSenderAddress("sip:2021020501@botplatform.rcs.chinaunicom.cn");
         request.setSmsSupported(false);
-        request.setSmsContent("hello world");
+        request.setSmsContent("hello world!");
         request.setContributionId("SFF$#REGFY7&^%THT");
         request.setConversationId("XSFDSFDFSAFDSAS^%");
-        MessagesRequest.ServiceCapability serviceCapability = new MessagesRequest.ServiceCapability();
+        ServiceCapability serviceCapability = new ServiceCapability();
         serviceCapability.setVersion("+g.gsma.rcs.botversion=\\\"#=1\\\"");
         request.setServiceCapability(Arrays.asList(serviceCapability));
+        //////////////////////////////
+        FileMessage fileMessage = new FileMessage();
 
-        MessagesRequest.TextMessage textMessage = new MessagesRequest.TextMessage();
+        FileMessage.ContentText contentText1 = new FileMessage.ContentText();
+        contentText1.setType("thumbnail");
+        contentText1.setFileSize("7427");
+        contentText1.setContentType("image/png");
+        contentText1.setUrl("http://maap.5g-msg.com:30001/bot/v1/medias/fid/526265517512179712");
+        contentText1.setUntil("2019-04-25T12:17:07Z");
+        FileMessage.ContentText contentText2 = new FileMessage.ContentText();
+        contentText2.setType("file");
+        contentText2.setFileSize("6617");
+        contentText2.setFileName("result.png");
+        contentText2.setContentType("image/png");
+        contentText2.setUrl("http://maap.5g-msg.com:30001/bot/v1/medias/fid/526265517512179712");
+        contentText2.setUntil("2019-04-25T12:17:07Z");
+        List<FileMessage.ContentText> contentTextlist = new ArrayList<>();
+        contentTextlist.add(contentText1);
+        contentTextlist.add(contentText2);
+        fileMessage.setContentText(contentTextlist);
+        fileMessage.setContentEncoding("utf8");
+
+        List<MessagesRequest.Message> messageList = new ArrayList<>();
+        messageList.add(fileMessage);
+        request.setMessageList(messageList);
+        System.out.println(JSON.object2string(request));
+        return sdk.messages(accessToken,request);
+    }
+
+    @RequestMapping("/messages2")
+    public MessagesResponse messages2() throws Exception {
+        String accessToken = FileDB.get("demo", "accessToken").value;
+        MessagesRequest request = new MessagesRequest();
+        request.setMessageId("cb1188a3-37ec-1037-9054-2dc66e44375b");
+        ArrayList<String> address = new ArrayList<>();
+        address.add("tel:+8618161274077");
+        request.setDestinationAddress(address);
+        request.setSenderAddress("sip:2021020501@botplatform.rcs.chinaunicom.cn");
+        request.setSmsSupported(false);
+        request.setSmsContent("hello world!");
+        request.setContributionId("SFF$#REGFY7&^%THT");
+        request.setConversationId("XSFDSFDFSAFDSAS^%");
+        ServiceCapability serviceCapability = new ServiceCapability();
+        serviceCapability.setVersion("+g.gsma.rcs.botversion=\\\"#=1\\\"");
+        request.setServiceCapability(Arrays.asList(serviceCapability));
+        ////////////文本消息+消息回落///////////////
+        TextMessage textMessage = new TextMessage();
+
         textMessage.setContentText("hello world");
+        textMessage.setContentEncoding("utf-8");
 
+        List<MessagesRequest.Message> messageList = new ArrayList<>();
+        messageList.add(textMessage);
+
+        request.setMessageList(messageList);
+        System.out.println(JSON.object2string(request));
+        return sdk.messages(accessToken, request);
+    }
+
+    @RequestMapping("/messages3")
+    public MessagesResponse messages3() throws Exception {
+        String accessToken = FileDB.get("demo", "accessToken").value;
+        MessagesRequest request = new MessagesRequest();
+        request.setMessageId("cb1188a3-37ec-1037-9054-2dc66e44375b");
+        ArrayList<String> address = new ArrayList<>();
+        address.add("tel:+8618161274077");
+        request.setDestinationAddress(address);
+        request.setSenderAddress("sip:2021020501@botplatform.rcs.chinaunicom.cn");
+        request.setSmsSupported(false);
+        request.setSmsContent("hello world!");
+        request.setContributionId("SFF$#REGFY7&^%THT");
+        request.setConversationId("XSFDSFDFSAFDSAS^%");
+        ServiceCapability serviceCapability = new ServiceCapability();
+        serviceCapability.setVersion("+g.gsma.rcs.botversion=\\\"#=1\\\"");
+        request.setServiceCapability(Arrays.asList(serviceCapability));
+        ////////////文本消息+悬浮菜单/////////////////
+        TextMessage textMessage = new TextMessage();
+
+        textMessage.setContentText("hello world");
+        textMessage.setContentEncoding("utf-8");
         MessagesRequest.BotsuggestionMessage botsuggestionMessage = new MessagesRequest.BotsuggestionMessage();
         MessagesRequest.BotsuggestionMessage.ContentText contentText = new MessagesRequest.BotsuggestionMessage.ContentText();
         MessagesRequest.BotsuggestionMessage.ContentText.Suggestion suggestion = new MessagesRequest.BotsuggestionMessage.ContentText.Suggestion();
@@ -140,7 +219,6 @@ public class Demo {
         List<MessagesRequest.BotsuggestionMessage.ContentText.Suggestion> suggestionlist = new  ArrayList<>();
         suggestionlist.add(suggestion);
 
-
         contentText.setSuggestions(suggestionlist);
         botsuggestionMessage.setContentText(contentText);
 
@@ -149,9 +227,53 @@ public class Demo {
         messageList.add(botsuggestionMessage);
 
         request.setMessageList(messageList);
+
+        request.setMessageList(messageList);
         System.out.println(JSON.object2string(messageList));
-        return sdk.messages(accessToken,request);
+
+        request.setMessageList(messageList);
+        System.out.println(JSON.object2string(request));
+        return sdk.messages(accessToken, request);
     }
+
+    @RequestMapping("/messages4")
+    public MessagesResponse messages4() throws Exception {
+        String accessToken = FileDB.get("demo", "accessToken").value;
+        MessagesRequest request = new MessagesRequest();
+        request.setMessageId("cb1188a3-37ec-1037-9054-2dc66e44375b");
+        ArrayList<String> address = new ArrayList<>();
+        address.add("tel:+8618161274077");
+        request.setDestinationAddress(address);
+        request.setSenderAddress("sip:2021020501@botplatform.rcs.chinaunicom.cn");
+        request.setSmsSupported(false);
+        request.setSmsContent("hello world!");
+        request.setContributionId("SFF$#REGFY7&^%THT");
+        request.setConversationId("XSFDSFDFSAFDSAS^%");
+        ServiceCapability serviceCapability = new ServiceCapability();
+        serviceCapability.setVersion("+g.gsma.rcs.botversion=\\\"#=1\\\"");
+        request.setServiceCapability(Arrays.asList(serviceCapability));
+        ///////地理消息////////////////////
+        GeoMessage geoMessage = new GeoMessage();
+        GeoMessage.ContentText contentText = new GeoMessage.ContentText();
+        contentText.setLatitude(7.0914591f);
+        contentText.setLongitude(50.7311865f);
+        contentText.setCrs("gcj02");
+        contentText.setU(10);
+        contentText.setRcs_l("Qingfeng Steamed Dumpling Shop \uD83C\uDF5A");
+
+
+        geoMessage.setContentText(contentText);
+
+        List<MessagesRequest.Message> messageList = new ArrayList<>();
+        messageList.add(geoMessage);
+
+        request.setMessageList(messageList);
+        System.out.println(JSON.object2string(request));
+
+        return sdk.messages(accessToken, request);
+    }
+
+
 
     @RequestMapping("/messagesrevoke")
     public MessagesrevokeResponse messagesrevoke() throws Exception {
