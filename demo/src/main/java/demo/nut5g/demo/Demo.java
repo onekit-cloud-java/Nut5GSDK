@@ -289,10 +289,10 @@ public class Demo {
         ///////卡片消息////////////////////
         MessagesRequest.Botmessage botMessage = new MessagesRequest.Botmessage();
         MessagesRequest.Botmessage.ContentText contentText = new MessagesRequest.Botmessage.ContentText();
-        Botmessage.ContentText.CssMessage cssMessage = new Botmessage.ContentText.CssMessage();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCard generalPurposeCard = new Botmessage.ContentText.CssMessage.GeneralPurposeCard();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content content = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Layout layout = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Layout();
+        Botmessage.ContentText.RichMessage cssMessage = new Botmessage.ContentText.RichMessage();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCard generalPurposeCard = new Botmessage.ContentText.RichMessage.GeneralPurposeCard();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content content = new Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCard.Layout layout = new Botmessage.ContentText.RichMessage.GeneralPurposeCard.Layout();
         layout.setCardOrientation("HORIZONTAL");
         layout.setImageAlignment("LEFT");
         layout.setTitleFontStyle(new ArrayList<String>(){{
@@ -303,46 +303,46 @@ public class Demo {
             add("calibri");
         }});
         layout.setStyle("http://example.com/default.css");
-        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Media media = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Media();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Media media = new Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Media();
         media.setMediaUrl("http://maap.5g-msg.com:30001/bot/v1/medias/fid/526573781936357376");
         media.setMediaContentType("image/png");
-        media.setMediaFileSize("6617");
+        media.setMediaFileSize(6617);
         media.setThumbnailUrl("http://maap.5g-msg.com:30001/bot/v1/medias/fid/526573781936357376");
         media.setThumbnailContentType("image/png");
         media.setThumbnailFileSize(6617);
         media.setHeight("MEDIUM_HEIGHT");
         media.setContentDescription("Textual description of media content, e. g. for use with screen readers");
-        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion suggestion1 = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion suggestion2 = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion suggestion3 = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion suggestion1 = new Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion suggestion2 = new Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion suggestion3 = new Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion();
        ///////////////////////
-        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action action1 = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Reply reply = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Reply();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action action1 = new Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Reply reply = new Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Reply();
 
-        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Reply.Postback postback = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Reply.Postback();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Reply.Postback postback = new Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Reply.Postback();
         postback.setData("set_by_chatbot_reply_no");
         reply.setDisplayText("No");
         reply.setPostback(postback);
-        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.UrlAction urlAction = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.UrlAction();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.UrlAction.OpenUrl openUrl = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.UrlAction.OpenUrl();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action.UrlAction urlAction = new Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action.UrlAction();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action.UrlAction.OpenUrl openUrl = new Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action.UrlAction.OpenUrl();
         openUrl.setUrl("https://www.10010.cn");
         openUrl.setApplication("webview");
         openUrl.setViewMode("half");
         urlAction.setOpenUrl(openUrl);
-        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.Postback postback1 = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.Postback();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action.Postback postback1 = new Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action.Postback();
         postback1.setData("set_by_chatbot_open_url");
         action1.setUrlAction(urlAction);
         action1.setDisplayText("Open website or deep link");
         action1.setPostback(postback1);
         suggestion1.setAction(action1);
         ///////////////////////
-        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action action2 = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.DialerAction dialerAction = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.DialerAction();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.DialerAction.DialPhoneNumber dialPhoneNumber = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.DialerAction.DialPhoneNumber();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action action2 = new Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action.DialerAction dialerAction = new Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action.DialerAction();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action.DialerAction.DialPhoneNumber dialPhoneNumber = new Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action.DialerAction.DialPhoneNumber();
         dialPhoneNumber.setPhoneNumber("+8617928222350");
 
         dialerAction.setDialPhoneNumber(dialPhoneNumber);
-        Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.Postback postback2 = new Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion.Action.Postback();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action.Postback postback2 = new Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action.Postback();
         postback2.setData("set_by_chatbot_open_dialer");
         action2.setDialerAction(dialerAction);
         action2.setDisplayText("Call a phone number");
@@ -353,7 +353,7 @@ public class Demo {
         suggestion3.setReply(reply);
 
         content.setMedia(media);
-        content.setSuggestions(new ArrayList<Botmessage.ContentText.CssMessage.GeneralPurposeCard.Content.Suggestion>(){{
+        content.setSuggestions(new ArrayList<Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion>(){{
             add(suggestion1);
             add(suggestion2);
             add(suggestion3);
@@ -387,8 +387,6 @@ public class Demo {
         request.setDestinationAddress(list);
         request.setTrafficType("advertisement");
         request.setSenderAddress("sip:2021020501@botplatform.rcs.chinaunicom.cn");
-        request.setSmsSupported(false);
-        request.setSmsContent("hello world!");
         request.setContributionId("SFF$#REGFY7&^%THT");
         request.setConversationId("XSFDSFDFSAFDSAS^%");
         ServiceCapability serviceCapability = new ServiceCapability();
@@ -397,33 +395,37 @@ public class Demo {
         ///////多卡片消息////////////////////
         MessagesRequest.Botmessage botMessage = new MessagesRequest.Botmessage();
         MessagesRequest.Botmessage.ContentText contentText = new MessagesRequest.Botmessage.ContentText();
-        Botmessage.ContentText.CssMessage cssMessage = new Botmessage.ContentText.CssMessage();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel generalPurposeCardCarousel  = new Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content content = new Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Layout layout = new Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Layout();
+        Botmessage.ContentText.RichMessage cssMessage = new Botmessage.ContentText.RichMessage();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel generalPurposeCardCarousel  = new Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content content1 = new Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content content2 = new Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content();
+        content2.setDescription("This is the description of the rich card. It's the first field that will be truncated if it exceeds the maximum width or height of a card");
+        content2.setTitle("This is a single rich card");
+
+        Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Layout layout = new Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Layout();
         layout.setCardWidth("MEDIUM_WIDTH");
         generalPurposeCardCarousel.setLayout(layout);
 
-        Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Media media = new Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Media();
+
+        Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Media media = new Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Media();
         media.setMediaUrl("http://maap.5g-msg.com:30001/bot/v1/medias/fid/526573781936357376");
         media.setMediaContentType("image/png");
-        media.setMediaFileSize("6617");
+        media.setMediaFileSize(6617);
         media.setThumbnailUrl("http://maap.5g-msg.com:30001/bot/v1/medias/fid/526573781936357376");
         media.setThumbnailContentType("image/png");
         media.setThumbnailFileSize(6617);
-        media.setHeight("MEDIUM_HEIGHT");
-        media.setContentDescription("Textual description of media content, e. g. for use with screen readers");
-        content.setMedia(media);
-        content.setDescription("This is the description of the rich card. It's the first field that will be truncated if it exceeds the maximum width or height of a card");
-        content.setTitle("This is a single rich card");
+        media.setHeight("SHORT_HEIGHT");
+        content1.setMedia(media);
+        content1.setDescription("This is the description of the rich card. It's the first field that will be truncated if it exceeds the maximum width or height of a card");
+        content1.setTitle("This is a single rich card");
 
-        Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion suggestion1 = new Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action actiona = new Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.Postback postbacka = new Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.Postback();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion suggestion1 = new Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action actiona = new Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.Postback postbacka = new Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.Postback();
         postbacka.setData("set_by_chatbot_open_map");
-        Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.MapAction mapAction = new Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.MapAction();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.MapAction.ShowLocation showLocation = new Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.MapAction.ShowLocation();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.MapAction.ShowLocation.Location location = new Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.MapAction.ShowLocation.Location();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.MapAction mapAction = new Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.MapAction();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.MapAction.ShowLocation showLocation = new Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.MapAction.ShowLocation();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.MapAction.ShowLocation.Location location = new Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.MapAction.ShowLocation.Location();
         location.setLatitude(37.4220041f);
         location.setLongitude(-122.0862515f);
         location.setLabel("Googleplex");
@@ -435,14 +437,14 @@ public class Demo {
         actiona.setPostback(postbacka);
         suggestion1.setAction(actiona);
 
-        Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion suggestion2 = new Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action actionb = new Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.Postback postbackb = new Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.Postback();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion suggestion2 = new Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action actionb = new Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.Postback postbackb = new Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.Postback();
         postbackb.setData("set_by_chatbot_create_calendar_event");
-        Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.CalendarAction calendarAction = new Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.CalendarAction();
-        Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.CalendarAction.CreateCalendarEvent createCalendarEvent = new Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.CalendarAction.CreateCalendarEvent();
-        createCalendarEvent.setStartTime("2017-03-14T00:00:00Z");
-        createCalendarEvent.setEndTime("2017-03-14T23:59:59Z");
+        Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.CalendarAction calendarAction = new Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.CalendarAction();
+        Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.CalendarAction.CreateCalendarEvent createCalendarEvent = new Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion.Action.CalendarAction.CreateCalendarEvent();
+        createCalendarEvent.setStartTime("2021-03-14T00:00:00Z");
+        createCalendarEvent.setEndTime("2021-03-14T23:59:59Z");
         createCalendarEvent.setTitle("Meeting");
         createCalendarEvent.setDescription("GSG review meeting");
         calendarAction.setCreateCalendarEvent(createCalendarEvent);
@@ -451,12 +453,16 @@ public class Demo {
         actionb.setCalendarAction(calendarAction);
         suggestion2.setAction(actionb);
 
-        List<Botmessage.ContentText.CssMessage.GeneralPurposeCardCarousel.Content.Suggestion> suggestionlist = new  ArrayList<>();
+        List<Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content.Suggestion> suggestionlist = new  ArrayList<>();
         suggestionlist.add(suggestion1);
         suggestionlist.add(suggestion2);
-        content.setSuggestions(suggestionlist);
+        content1.setSuggestions(suggestionlist);
+        List<Botmessage.ContentText.RichMessage.GeneralPurposeCardCarousel.Content> contentList = new ArrayList<>();
+        contentList.add(content1);
+        contentList.add(content2);
 
-        generalPurposeCardCarousel.setContent(content);
+
+        generalPurposeCardCarousel.setContent(contentList);
 
 
         cssMessage.setGeneralPurposeCardCarousel(generalPurposeCardCarousel);
@@ -522,10 +528,7 @@ public class Demo {
 
         ///////////////
         List<MessagesRequest.Message> messageList = new ArrayList<>();
-
         messageList.add(botMessage);
-        messageList.add(botsuggestionMessage);
-
 
         request.setMessageList(messageList);
 
