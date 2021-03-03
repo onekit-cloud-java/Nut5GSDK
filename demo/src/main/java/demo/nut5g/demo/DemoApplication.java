@@ -15,23 +15,24 @@ import java.util.*;
 @SpringBootApplication
 public class DemoApplication {
 
-public static  String accessToken = "52bf3f57-5bea-481f-9389-6425fade6778";
-//    @Bean
+    public static String accessToken = "52bf3f57-5bea-481f-9389-6425fade6778";
+
+    //    @Bean
 //    public ServletWebServerFactory webServerFactory() {
 //        TomcatServletWebServerFactory fa = new TomcatServletWebServerFactory();
 //        fa.addConnectorCustomizers((TomcatConnectorCustomizer) connector -> connector.setProperty("relaxedQueryChars", "[]{}:@%."));
 //        return fa;
 //    }
-@Bean
-public ServletWebServerFactory servletContainer() {
-    TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
-    tomcat.addAdditionalTomcatConnectors(createStandardConnector());
-    return tomcat;
-}
+    @Bean
+    public ServletWebServerFactory servletContainer() {
+        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
+        tomcat.addAdditionalTomcatConnectors(createStandardConnector());
+        return tomcat;
+    }
 
     private Connector createStandardConnector() {
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
-        connector.setPort(10000);
+        connector.setPort(9080);
         return connector;
     }
 
@@ -40,7 +41,7 @@ public ServletWebServerFactory servletContainer() {
         SpringApplication.run(DemoApplication.class, args);
 
 
-        long timestamp = new Date().getTime() ;
+        long timestamp = new Date().getTime();
         UUID nonce = UUID.randomUUID();
         ///////////////////////////////////////////////
         List<String> list = Arrays.asList(accessToken, String.valueOf(timestamp), nonce.toString());
@@ -56,9 +57,9 @@ public ServletWebServerFactory servletContainer() {
         try {
             String signature = new SIGN(SIGN.Method.HMACSHA256).sign(str);
             ////////////////////////////////////
-            System.out.println("timestamp "+timestamp);
-            System.out.println("nonce "+nonce);
-            System.out.println("signature "+signature);
+            System.out.println("timestamp " + timestamp);
+            System.out.println("nonce " + nonce);
+            System.out.println("signature " + signature);
         } catch (Exception e) {
             e.printStackTrace();
         }

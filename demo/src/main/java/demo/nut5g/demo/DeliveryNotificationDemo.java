@@ -25,7 +25,9 @@ public class DeliveryNotificationDemo {
             FileDB.set("status", new Date().toString(), json);
         }catch (Exception e){
             e.printStackTrace();
-            FileDB.set("error",new Date().toString(),e.getMessage());
+            FileDB.set("error", new Date().toString(), e.getMessage()
+                    +"\n"+e.getStackTrace()[0].toString()
+                    +"\n"+e.getStackTrace()[1].toString());
         }
     }
 }

@@ -26,7 +26,9 @@ public class MessageNotificationDemo {
             System.out.println(JSON.object2string(data));
         } catch (Exception e) {
             e.printStackTrace();
-            FileDB.set("error", new Date().toString(), e.getMessage());
+            FileDB.set("error", new Date().toString(), e.getMessage()
+                    +"\n"+e.getStackTrace()[0].toString()
+                    +"\n"+e.getStackTrace()[1].toString());
         }
 
     }
