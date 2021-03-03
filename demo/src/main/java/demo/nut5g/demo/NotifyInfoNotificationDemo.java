@@ -30,30 +30,43 @@ public class NotifyInfoNotificationDemo {
     public void informationChange(
              HttpServletRequest request
     ) throws Exception {
-        //String accessToken = FileDB.get("demo","accessToken").value;
-        NotifyInfoNotification.informationChange(request,DemoApplication.accessToken);
+        try {
+            //String accessToken = FileDB.get("demo","accessToken").value;
+            NotifyInfoNotification.informationChange(request, DemoApplication.accessToken);
+        } catch (Exception e) {
+            e.printStackTrace();
+            FileDB.set("error", new Date().toString(), e.getMessage());
+        }
     }
 
     @RequestMapping(value = "/rcsspam",method = RequestMethod.POST)
     public void rcsspam(
             HttpServletRequest request
     ) throws Exception {
-    //    String accessToken = FileDB.get("demo","accessToken").value;
-        RcsspamNotification data =  NotifyInfoNotification.rcsspam(request,DemoApplication.accessToken);
-        String json = JSON.object2string(data);
-        System.out.println(json);
-        FileDB.set("rcsspam",new Date().toString(),json);
+        try {//    String accessToken = FileDB.get("demo","accessToken").value;
+            RcsspamNotification data = NotifyInfoNotification.rcsspam(request, DemoApplication.accessToken);
+            String json = JSON.object2string(data);
+            System.out.println(json);
+            FileDB.set("rcsspam", new Date().toString(), json);
+        } catch (Exception e) {
+            e.printStackTrace();
+            FileDB.set("error", new Date().toString(), e.getMessage());
+        }
     }
 
     @RequestMapping(value = "/check",method = RequestMethod.POST)
     public void checkmessage(
             HttpServletRequest request
     ) throws Exception {
-       // String accessToken = FileDB.get("demo","accessToken").value;
-        CheckNotification data = NotifyInfoNotification.check(request,DemoApplication.accessToken);
-        String json = JSON.object2string(data);
-        System.out.println(json);
-        FileDB.set("checkmessage",new Date().toString(),json);
+        try {// String accessToken = FileDB.get("demo","accessToken").value;
+            CheckNotification data = NotifyInfoNotification.check(request, DemoApplication.accessToken);
+            String json = JSON.object2string(data);
+            System.out.println(json);
+            FileDB.set("checkmessage", new Date().toString(), json);
+        } catch (Exception e) {
+            e.printStackTrace();
+            FileDB.set("error", new Date().toString(), e.getMessage());
+        }
     }
 
 

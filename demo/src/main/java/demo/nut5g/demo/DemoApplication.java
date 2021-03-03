@@ -2,6 +2,7 @@ package demo.nut5g.demo;
 
 import cn.onekit.cloud.nut5g.BadSignException;
 import cn.onekit.thekit.SIGN;
+import org.apache.catalina.connector.Connector;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
@@ -21,6 +22,18 @@ public static  String accessToken = "52bf3f57-5bea-481f-9389-6425fade6778";
 //        fa.addConnectorCustomizers((TomcatConnectorCustomizer) connector -> connector.setProperty("relaxedQueryChars", "[]{}:@%."));
 //        return fa;
 //    }
+@Bean
+public ServletWebServerFactory servletContainer() {
+    TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
+    tomcat.addAdditionalTomcatConnectors(createStandardConnector());
+    return tomcat;
+}
+
+    private Connector createStandardConnector() {
+        Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
+        connector.setPort(10000);
+        return connector;
+    }
 
     public static void main(String[] args) {
 

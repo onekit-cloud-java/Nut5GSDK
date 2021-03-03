@@ -65,14 +65,19 @@ public class Demo {
     @RequestMapping("/mediasupload")
     public MediasuploadResponse mediasupload() throws Exception {
         String accessToken = FileDB.get("demo","accessToken").value;
-        File file = new File("E:\\a.png");
+        String userHome = System.getProperty("user.home");
+        File file = new File(userHome+"\\a.png");
         BufferedImage read = ImageIO.read(file);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(read, "png", baos);
         byte[] bytes = baos.toByteArray();
-        return sdk.mediasupload(accessToken,"temp",new HashMap<String, byte[]>(){{
+        MediasuploadResponse  response =  sdk.mediasupload(accessToken,"temp",new HashMap<String, byte[]>(){{
             put("file1",bytes);
         }});
+        List<MediasuploadResponse.FileInfo> fileInfo = response.getFileInfo();
+        String url = fileInfo.get(0).getUrl();
+        FileDB.set("mediasupload","url",url);
+        return response;
 
     }
 
@@ -87,7 +92,7 @@ public class Demo {
     @RequestMapping("/mediasdelete")
     public MediasdeleteResponse mediasdelete() throws Exception {
         String accessToken = FileDB.get("demo","accessToken").value;
-        String url = "http://maap.5g-msg.com:30001/bot/v1/medias/fid/524397271800463360";
+        String url = FileDB.get("mediasupload","url").value;
         return sdk.mediasdelete(accessToken,url);
     }
 

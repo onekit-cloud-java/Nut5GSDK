@@ -17,11 +17,15 @@ public class DeliveryNotificationDemo {
     @RequestMapping(value = "/status",method = RequestMethod.POST)
     public void status(
             HttpServletRequest request
-    ) throws Exception {
-        //String accessToken = FileDB.get("demo","accessToken").value;
-        StatusNotification data =  DeliveryNotification.status(request, DemoApplication.accessToken);
-        String json = JSON.object2string(data);
-        System.out.println(json);
-        FileDB.set("status",new Date().toString(),json);
+    )  {
+        try {//String accessToken = FileDB.get("demo","accessToken").value;
+            StatusNotification data = DeliveryNotification.status(request, DemoApplication.accessToken);
+            String json = JSON.object2string(data);
+            System.out.println(json);
+            FileDB.set("status", new Date().toString(), json);
+        }catch (Exception e){
+            e.printStackTrace();
+            FileDB.set("error",new Date().toString(),e.getMessage());
+        }
     }
 }
