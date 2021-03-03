@@ -28,7 +28,7 @@
 
  <groupId>cn.onekit.x2x.cloud</groupId>
  <artifactId>nut5g</artifactId>
- <version>5.0.13</version>
+ <version>5.0.14</version>
  </dependency>
 
      </dependencies>

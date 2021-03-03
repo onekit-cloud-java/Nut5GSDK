@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/nut5g/messageNotification/sip:2021020501@botplatform.rcs.chinaunicom.cn")
 public class MessageNotificationDemo {
 
-    @RequestMapping(value = "/messages1", method = RequestMethod.POST)
-    public void recievemessages1(
+    @RequestMapping(value = "/messages", method = RequestMethod.POST)
+    public void recievemessages(
             HttpServletRequest request
     ) throws Exception {
         ReceivemessageNotification data = MessageNotification.receivemessage(request, DemoApplication.accessToken);
