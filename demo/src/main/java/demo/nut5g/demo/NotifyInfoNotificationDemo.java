@@ -6,6 +6,7 @@ import cn.onekit.cloud.nut5g.notification.request.RcsspamNotification;
 import cn.onekit.cloud.nut5g.request.*;
 import cn.onekit.cloud.nut5g.response.*;
 import cn.onekit.cloud.nut5gsdk.Nut5GSDK;
+import cn.onekit.thekit.ERROR;
 import cn.onekit.thekit.FileDB;
 import cn.onekit.thekit.JSON;
 import cn.onekit.thekit.STRING;
@@ -31,13 +32,11 @@ public class NotifyInfoNotificationDemo {
              HttpServletRequest request
     )  {
         try {
-            //String accessToken = FileDB.get("demo","accessToken").value;
-            NotifyInfoNotification.informationChange(request, DemoApplication.accessToken);
+
+            new NotifyInfoNotification(request,Nut5GAccount.signKey).informationChange();
         } catch (Exception e) {
             e.printStackTrace();
-            FileDB.set("error", new Date().toString(), e.getMessage()
-                    +"\n"+e.getStackTrace()[0].toString()
-                    +"\n"+e.getStackTrace()[1].toString());
+            FileDB.set("error", new Date().toString(), ERROR.toString(e));
         }
     }
 
@@ -45,16 +44,15 @@ public class NotifyInfoNotificationDemo {
     public void rcsspam(
             HttpServletRequest request
     )  {
-        try {//    String accessToken = FileDB.get("demo","accessToken").value;
-            RcsspamNotification data = NotifyInfoNotification.rcsspam(request, DemoApplication.accessToken);
+        try {
+
+            RcsspamNotification data = new NotifyInfoNotification(request,Nut5GAccount.signKey).rcsspam();
             String json = JSON.object2string(data);
             System.out.println(json);
             FileDB.set("rcsspam", new Date().toString(), json);
         } catch (Exception e) {
             e.printStackTrace();
-            FileDB.set("error", new Date().toString(), e.getMessage()
-                    +"\n"+e.getStackTrace()[0].toString()
-                    +"\n"+e.getStackTrace()[1].toString());
+            FileDB.set("error", new Date().toString(), ERROR.toString(e));
         }
     }
 
@@ -62,16 +60,15 @@ public class NotifyInfoNotificationDemo {
     public void checkmessage(
             HttpServletRequest request
     ) {
-        try {// String accessToken = FileDB.get("demo","accessToken").value;
-            CheckNotification data = NotifyInfoNotification.check(request, DemoApplication.accessToken);
+        try {
+
+            CheckNotification data =new NotifyInfoNotification(request,Nut5GAccount.signKey).check();
             String json = JSON.object2string(data);
             System.out.println(json);
             FileDB.set("checkmessage", new Date().toString(), json);
         } catch (Exception e) {
             e.printStackTrace();
-            FileDB.set("error", new Date().toString(), e.getMessage()
-                    +"\n"+e.getStackTrace()[0].toString()
-                    +"\n"+e.getStackTrace()[1].toString());
+            FileDB.set("error", new Date().toString(), ERROR.toString(e));
         }
     }
 

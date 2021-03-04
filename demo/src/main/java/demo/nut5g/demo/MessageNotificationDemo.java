@@ -2,6 +2,7 @@ package demo.nut5g.demo;
 
 import cn.onekit.cloud.nut5g.notification.MessageNotification;
 import cn.onekit.cloud.nut5g.notification.request.ReceivemessageNotification;
+import cn.onekit.thekit.ERROR;
 import cn.onekit.thekit.FileDB;
 import cn.onekit.thekit.JSON;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,14 +22,13 @@ public class MessageNotificationDemo {
             HttpServletRequest request
     ) {
         try {
-            ReceivemessageNotification data = MessageNotification.receivemessage(request, DemoApplication.accessToken);
+
+            ReceivemessageNotification data = new MessageNotification(request,Nut5GAccount.signKey).receivemessage();
             FileDB.set("recievemessages", new Date().toString(), JSON.object2string(data));
             System.out.println(JSON.object2string(data));
         } catch (Exception e) {
             e.printStackTrace();
-            FileDB.set("error", new Date().toString(), e.getMessage()
-                    +"\n"+e.getStackTrace()[0].toString()
-                    +"\n"+e.getStackTrace()[1].toString());
+            FileDB.set("error", new Date().toString(), ERROR.toString(e));
         }
 
     }

@@ -1,7 +1,9 @@
 package demo.nut5g.demo;
 
 import cn.onekit.cloud.nut5g.notification.DeliveryNotification;
+import cn.onekit.cloud.nut5g.notification.Nut5GNotify;
 import cn.onekit.cloud.nut5g.notification.request.StatusNotification;
+import cn.onekit.thekit.ERROR;
 import cn.onekit.thekit.FileDB;
 import cn.onekit.thekit.JSON;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,16 +20,15 @@ public class DeliveryNotificationDemo {
     public void status(
             HttpServletRequest request
     )  {
-        try {//String accessToken = FileDB.get("demo","accessToken").value;
-            StatusNotification data = DeliveryNotification.status(request, DemoApplication.accessToken);
+        try {
+            DeliveryNotification deliveryNotification = new DeliveryNotification(request, Nut5GAccount.signKey);
+            StatusNotification data = deliveryNotification.status();
             String json = JSON.object2string(data);
             System.out.println(json);
             FileDB.set("status", new Date().toString(), json);
         }catch (Exception e){
             e.printStackTrace();
-            FileDB.set("error", new Date().toString(), e.getMessage()
-                    +"\n"+e.getStackTrace()[0].toString()
-                    +"\n"+e.getStackTrace()[1].toString());
+            FileDB.set("error", new Date().toString(), ERROR.toString(e));
         }
     }
 }

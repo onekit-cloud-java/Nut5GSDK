@@ -31,7 +31,7 @@ public class Demo {
     public AccessTokenResponse getAccessToken() throws Exception{
         AccessTokenRequest request = new AccessTokenRequest();
         request.setAppId(Nut5GAccount.appid);
-        request.setAppKey(Nut5GAccount.secret);
+        request.setAppKey(Nut5GAccount.appKey);
         AccessTokenResponse response = sdk.accessToken(request);
         FileDB.set("demo","accessToken",response.getAccessToken());
         return response;
@@ -206,7 +206,7 @@ public class Demo {
         MessagesRequest.BotsuggestionMessage.ContentText.Suggestion.Action.DialerAction.DialPhoneNumber dialPhoneNumber = new MessagesRequest.BotsuggestionMessage.ContentText.Suggestion.Action.DialerAction.DialPhoneNumber();
         dialPhoneNumber.setPhoneNumber("+8617928222350");
         dialerAction.setDialPhoneNumber(dialPhoneNumber);
-        openUrl.setUrl("https://www.10010.com");
+        openUrl.setUrl("https://www.9443.com");
         urlAction.setOpenUrl(openUrl);
         postback1.setData("set_by_chatbot_open_url");
 
@@ -330,7 +330,7 @@ public class Demo {
         reply.setPostback(postback);
         Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action.UrlAction urlAction = new Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action.UrlAction();
         Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action.UrlAction.OpenUrl openUrl = new Botmessage.ContentText.RichMessage.GeneralPurposeCard.Content.Suggestion.Action.UrlAction.OpenUrl();
-        openUrl.setUrl("https://www.10010.cn");
+        openUrl.setUrl("https://www.9443.cn");
         openUrl.setApplication("webview");
         openUrl.setViewMode("half");
         urlAction.setOpenUrl(openUrl);
@@ -500,7 +500,7 @@ public class Demo {
         MessagesRequest.BotsuggestionMessage.ContentText.Suggestion.Action.UrlAction boturlAction1 = new MessagesRequest.BotsuggestionMessage.ContentText.Suggestion.Action.UrlAction();
         MessagesRequest.BotsuggestionMessage.ContentText.Suggestion.Action.UrlAction.OpenUrl botopenUrl1 = new MessagesRequest.BotsuggestionMessage.ContentText.Suggestion.Action.UrlAction.OpenUrl();
 
-        botopenUrl1.setUrl("https://www.10010.com");
+        botopenUrl1.setUrl("https://www.9443.com");
         boturlAction1.setOpenUrl(botopenUrl1);
         botpostback3.setData("set_by_chatbot_open_url");
         botaction1.setPostback(botpostback3);
