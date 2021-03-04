@@ -1,7 +1,6 @@
 package demo.nut5g.demo;
 
 import cn.onekit.cloud.nut5g.notification.DeliveryNotification;
-import cn.onekit.cloud.nut5g.notification.Nut5GNotify;
 import cn.onekit.cloud.nut5g.notification.request.StatusNotification;
 import cn.onekit.thekit.ERROR;
 import cn.onekit.thekit.FileDB;

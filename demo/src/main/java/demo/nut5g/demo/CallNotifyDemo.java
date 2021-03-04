@@ -16,7 +16,8 @@ public class CallNotifyDemo {
     public static void main(String[] args) throws Exception {
         disableSslVerification();
       //  informationChange();
-       recievemessage();
+       //recievemessage();
+        notifyPath();
     }
 
     public static void disableSslVerification() {
@@ -56,18 +57,24 @@ public class CallNotifyDemo {
         }
     }
 
+    public static String getRandomString(int length){
+        String str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random=new Random();
+        StringBuffer sb=new StringBuffer();
+        for(int i=0;i<length;i++){
+            int number=random.nextInt(62);
+            sb.append(str.charAt(number));
+        }
+        return sb.toString();
+    }
+
 
     static Map<String,String> _sign() throws Exception {
         long timestamp = new Date().getTime();
         UUID nonce = UUID.randomUUID();
         ///////////////////////////////////////////////
         List<String> list = Arrays.asList(Nut5GAccount.signKey, String.valueOf(timestamp), nonce.toString());
-        list.sort(new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                return o1.compareTo(o1);
-            }
-        });
+        Collections.sort(list);
         String str = String.join("", list);
 
 
@@ -78,6 +85,7 @@ public class CallNotifyDemo {
             put("nonce", String.valueOf(nonce));
             put("signature", signature);
             put("Content-Type","application/json");
+            put("echoStr", getRandomString(10));
         }};
 
     }
@@ -120,6 +128,12 @@ public class CallNotifyDemo {
 
     public static void  status() throws Exception {
         String url = "https://localhost:9443/nut5g/deliveryNotification/sip:2021020501@botplatform.rcs.chinaunicom.cn/status";
+        AJAX.headers = _sign();
+        AJAX.request(url);
+    }
+
+    public static void  notifyPath() throws Exception {
+        String url = "http://app.onekit.cn:9080/nut5g/notifyPath";
         AJAX.headers = _sign();
         AJAX.request(url);
     }
