@@ -1,15 +1,16 @@
 package demo.nut5g.demo;
 
-import cn.onekit.cloud.nut5g.notification.MessageNotification;
-import cn.onekit.cloud.nut5g.notification.request.ReceivemessageNotification;
+import cn.onekit.cloud.notificationsdk.MessageNotificationSDK;
 import cn.onekit.thekit.ERROR;
 import cn.onekit.thekit.FileDB;
 import cn.onekit.thekit.JSON;
+import com.msg5g.maap.notification.receive.ReceivemessageNotification;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 
@@ -19,11 +20,12 @@ public class MessageNotificationDemo {
 
     @RequestMapping(value = "/messages", method = RequestMethod.POST)
     public void recievemessages(
-            HttpServletRequest request
+            HttpServletRequest request,
+            HttpServletResponse response
     ) {
         try {
 
-            ReceivemessageNotification data = new MessageNotification(request,Nut5GAccount.signKey).receivemessage();
+            ReceivemessageNotification data = new MessageNotificationSDK(Nut5GAccount.appid,request,response, Nut5GAccount.signKey).receivemessage();
             FileDB.set("recievemessages", new Date().toString(), JSON.object2string(data));
             System.out.println(JSON.object2string(data));
         } catch (Exception e) {

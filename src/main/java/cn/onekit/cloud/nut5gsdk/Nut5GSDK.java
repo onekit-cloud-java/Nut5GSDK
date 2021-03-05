@@ -1,12 +1,13 @@
 package cn.onekit.cloud.nut5gsdk;
 
-import cn.onekit.cloud.nut5g.Nut5GAPI;
-import cn.onekit.cloud.nut5g.Nut5GError;
-import cn.onekit.cloud.nut5g.request.*;
-import cn.onekit.cloud.nut5g.response.*;
 import cn.onekit.thekit.AJAX;
 import cn.onekit.thekit.JSON;
 import com.google.gson.JsonObject;
+import com.msg5g.maap.Nut5GAPI;
+import com.msg5g.maap.Nut5GError;
+import com.msg5g.maap.request.*;
+import com.msg5g.maap.response.*;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +57,7 @@ public class Nut5GSDK implements Nut5GAPI {
     }
 
     @Override
-    public void chatBotInfo(String accessToken,ChatBotInfoRequest chatBotInfoRequest) throws Nut5GError {
+    public void chatBotInfo(String accessToken, ChatBotInfoRequest chatBotInfoRequest) throws Nut5GError {
         try {
         String url = String.format("%s/update/chatBotInfo/optionals",host);
             _init(accessToken);
@@ -70,7 +71,7 @@ public class Nut5GSDK implements Nut5GAPI {
     }
 
     @Override
-    public void chatBotInfomenu(String accessToken,ChatBotInfomenuRequest chatBotInfomenuRequest) throws Nut5GError {
+    public void chatBotInfomenu(String accessToken, ChatBotInfomenuRequest chatBotInfomenuRequest) throws Nut5GError {
         try {
             String url = String.format("%s/update/chatBotInfo/menu",host);
             _init(accessToken);
@@ -99,7 +100,7 @@ public class Nut5GSDK implements Nut5GAPI {
     }
 
     @Override
-    public MediasuploadResponse mediasupload(String accessToken,String uploadMode, Map<String,byte[]> files) throws Nut5GError {
+    public MediasuploadResponse mediasupload(String accessToken, String uploadMode, Map<String,byte[]> files) throws Nut5GError {
         try {
             String url = String.format("%s/medias/upload",host);
             _init(accessToken,new HashMap<String, String>(){{

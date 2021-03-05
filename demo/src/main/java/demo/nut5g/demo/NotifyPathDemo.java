@@ -1,6 +1,6 @@
 package demo.nut5g.demo;
 
-import cn.onekit.cloud.nut5g.notification.NotifyPath;
+import cn.onekit.cloud.notificationsdk.NotifyPathSDK;
 import cn.onekit.thekit.ERROR;
 import cn.onekit.thekit.FileDB;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +20,7 @@ public class NotifyPathDemo {
             HttpServletResponse response
     ) {
         try {
-            new NotifyPath(Nut5GAccount.appid,request,response,Nut5GAccount.signKey).notifyPath();
+            new NotifyPathSDK(Nut5GAccount.appid,request,response,Nut5GAccount.signKey).notifyPath();
         } catch (Exception e) {
             e.printStackTrace();
             FileDB.set("error", new Date().toString(), ERROR.toString(e));

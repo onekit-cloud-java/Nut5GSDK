@@ -1,16 +1,16 @@
 package demo.nut5g.demo;
 
-import cn.onekit.cloud.nut5g.notification.request.ReceivemessageNotification;
+
 import cn.onekit.thekit.AJAX;
-import cn.onekit.thekit.FileDB;
 import cn.onekit.thekit.JSON;
 import cn.onekit.thekit.SIGN;
+import com.msg5g.maap.notification.receive.ReceivemessageNotification;
 
 import javax.net.ssl.*;
 import java.security.cert.CertificateException;
 import java.util.*;
 
-import static cn.onekit.cloud.nut5g.notification.request.ReceivemessageNotification.*;
+
 
 public class CallNotifyDemo {
     public static void main(String[] args) throws Exception {
@@ -117,9 +117,9 @@ public class CallNotifyDemo {
         receivemessageNotification.setSenderAddress("tel:+8618161274077");
                 receivemessageNotification.setContributionId("SFF$#REGFY7&^%THT");
                 receivemessageNotification.setConversationId("XSFDSFDFSAFDSAS^%");
-        TextMessage textMessage = new TextMessage();
+        ReceivemessageNotification.TextMessage textMessage = new ReceivemessageNotification.TextMessage();
         textMessage.setContentText("hello world");
-        receivemessageNotification.setMessageList(new ArrayList<Message>(){{
+        receivemessageNotification.setMessageList(new ArrayList<ReceivemessageNotification.Message>(){{
             add(textMessage);
         }});
         AJAX.request(url,"post", JSON.object2string(receivemessageNotification));

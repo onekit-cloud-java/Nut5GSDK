@@ -1,25 +1,21 @@
 package demo.nut5g.demo;
 
-import cn.onekit.cloud.nut5g.notification.NotifyInfoNotification;
-import cn.onekit.cloud.nut5g.notification.request.CheckNotification;
-import cn.onekit.cloud.nut5g.notification.request.RcsspamNotification;
-import cn.onekit.cloud.nut5g.request.*;
-import cn.onekit.cloud.nut5g.response.*;
-import cn.onekit.cloud.nut5gsdk.Nut5GSDK;
+import cn.onekit.cloud.notificationsdk.NotifyInfoNotificationSDK;
+
 import cn.onekit.thekit.ERROR;
 import cn.onekit.thekit.FileDB;
 import cn.onekit.thekit.JSON;
-import cn.onekit.thekit.STRING;
+
+import com.msg5g.maap.notification.receive.CheckNotification;
+import com.msg5g.maap.notification.receive.RcsspamNotification;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
+import javax.servlet.http.HttpServletResponse;
+
 import java.util.*;
 
 
@@ -29,11 +25,12 @@ public class NotifyInfoNotificationDemo {
 
     @RequestMapping(value = "/informationChange",method = RequestMethod.POST)
     public void informationChange(
-             HttpServletRequest request
+             HttpServletRequest request,
+             HttpServletResponse response
     )  {
         try {
 
-            new NotifyInfoNotification(request,Nut5GAccount.signKey).informationChange();
+            new NotifyInfoNotificationSDK(Nut5GAccount.appid,request,response, Nut5GAccount.signKey).informationChange();
         } catch (Exception e) {
             e.printStackTrace();
             FileDB.set("error", new Date().toString(), ERROR.toString(e));
@@ -42,11 +39,12 @@ public class NotifyInfoNotificationDemo {
 
     @RequestMapping(value = "/rcsspam",method = RequestMethod.POST)
     public void rcsspam(
-            HttpServletRequest request
+            HttpServletRequest request,
+            HttpServletResponse response
     )  {
         try {
 
-            RcsspamNotification data = new NotifyInfoNotification(request,Nut5GAccount.signKey).rcsspam();
+            RcsspamNotification data = new NotifyInfoNotificationSDK(Nut5GAccount.appid,request,response, Nut5GAccount.signKey).rcsspam();
             String json = JSON.object2string(data);
             System.out.println(json);
             FileDB.set("rcsspam", new Date().toString(), json);
@@ -58,11 +56,12 @@ public class NotifyInfoNotificationDemo {
 
     @RequestMapping(value = "/check",method = RequestMethod.POST)
     public void checkmessage(
-            HttpServletRequest request
+            HttpServletRequest request,
+            HttpServletResponse response
     ) {
         try {
 
-            CheckNotification data =new NotifyInfoNotification(request,Nut5GAccount.signKey).check();
+            CheckNotification data =new NotifyInfoNotificationSDK(Nut5GAccount.appid,request,response, Nut5GAccount.signKey).check();
             String json = JSON.object2string(data);
             System.out.println(json);
             FileDB.set("checkmessage", new Date().toString(), json);
