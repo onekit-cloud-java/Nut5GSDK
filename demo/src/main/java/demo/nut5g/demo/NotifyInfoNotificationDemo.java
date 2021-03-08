@@ -27,13 +27,14 @@ public class NotifyInfoNotificationDemo {
     public void informationChange(
              HttpServletRequest request,
              HttpServletResponse response
-    )  {
+    ) throws Exception {
         try {
 
             new NotifyInfoNotificationSDK(Nut5GAccount.appid,request,response, Nut5GAccount.signKey).informationChange();
         } catch (Exception e) {
             e.printStackTrace();
             FileDB.set("error", new Date().toString(), ERROR.toString(e));
+            throw e;
         }
     }
 
@@ -41,7 +42,7 @@ public class NotifyInfoNotificationDemo {
     public void rcsspam(
             HttpServletRequest request,
             HttpServletResponse response
-    )  {
+    ) throws Exception {
         try {
 
             RcsspamNotification data = new NotifyInfoNotificationSDK(Nut5GAccount.appid,request,response, Nut5GAccount.signKey).rcsspam();
@@ -51,25 +52,11 @@ public class NotifyInfoNotificationDemo {
         } catch (Exception e) {
             e.printStackTrace();
             FileDB.set("error", new Date().toString(), ERROR.toString(e));
+            throw e;
         }
     }
 
-    @RequestMapping(value = "/check",method = RequestMethod.POST)
-    public void checkmessage(
-            HttpServletRequest request,
-            HttpServletResponse response
-    ) {
-        try {
 
-            CheckNotification data =new NotifyInfoNotificationSDK(Nut5GAccount.appid,request,response, Nut5GAccount.signKey).check();
-            String json = JSON.object2string(data);
-            System.out.println(json);
-            FileDB.set("checkmessage", new Date().toString(), json);
-        } catch (Exception e) {
-            e.printStackTrace();
-            FileDB.set("error", new Date().toString(), ERROR.toString(e));
-        }
-    }
 
 
 

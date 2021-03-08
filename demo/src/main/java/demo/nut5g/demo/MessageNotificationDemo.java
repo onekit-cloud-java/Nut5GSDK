@@ -22,7 +22,7 @@ public class MessageNotificationDemo {
     public void recievemessages(
             HttpServletRequest request,
             HttpServletResponse response
-    ) {
+    ) throws Exception {
         try {
 
             ReceivemessageNotification data = new MessageNotificationSDK(Nut5GAccount.appid,request,response, Nut5GAccount.signKey).receivemessage();
@@ -31,6 +31,7 @@ public class MessageNotificationDemo {
         } catch (Exception e) {
             e.printStackTrace();
             FileDB.set("error", new Date().toString(), ERROR.toString(e));
+            throw e;
         }
 
     }
